@@ -1,0 +1,97 @@
+<HTML>
+<HEAD>
+  <META HTTP-EQUIV="Content-Type" 
+        CONTENT="text/html; charset=utf-8" />
+
+<SCRIPT LANGUAGE=JAVASCRIPT>
+var CurrentObjectID = 0;
+var CurrentDir = 'detail/';
+var sDir  = self.location.href;
+var myDir = sDir.substring(0,sDir.lastIndexOf('/')+1);
+var nm = navigator.appName+navigator.appVersion;
+
+function HB(text) 
+{
+    self.status=text;
+}
+function UB(id) 
+{
+    self.status="";
+}
+function ShowWBSDetail()
+{
+ CurrentDir = "detail/";
+ ShowCurrentObj();
+}
+function ShowWBSActivities()
+{
+ CurrentDir = "activity/";
+ ShowCurrentObj();
+}
+function ShowWBSWPDocs()
+{
+ CurrentDir = "wpdocs/";
+ ShowCurrentObj();
+}
+function ShowWBSIssues()
+{
+ CurrentDir = "issues/";
+ ShowCurrentObj();
+}
+function ShowWBSRisks()
+{
+ CurrentDir = "risks/";
+ ShowCurrentObj();
+}
+function ShowWBSBudget()
+{
+ CurrentDir = "budget/";
+ ShowCurrentObj();
+}
+function ShowWBSNotebk()
+{
+ CurrentDir = "notebook/";
+ ShowCurrentObj();
+}
+
+function ShowCurrentObj()
+{
+ if(CurrentObjectID!=0) {
+  parent.Content.location.href=myDir+CurrentDir+CurrentObjectID+".htm";
+  }
+ else {  
+  parent.Content.location.href=myDir+"pp_cntnt.htm";
+  }
+}
+</SCRIPT>
+<style>
+<!..
+A {text-decoration: none}
+..>
+</style>
+</HEAD>
+
+<BODY onLoad="parent.Loaded=true;" 
+      BGCOLOR="#E3D994"
+      BACKGROUND="images\" 	 
+      TEXT="#000000" 
+      LINK="#000000" 
+      ALINK="#000000" 
+      VLINK="#000000" >
+
+<TABLE BORDER=0 WIDTH=100% HEIGHT=100% CELLPADDING=10 CELLSPACING=0>
+ <TR>
+  <TD WIDTH=*% </TD>
+  <TD WIDTH=1% ALIGN=CENTER NOWRAP><A HREF="javascript:ShowWBSDetail()" onMouseOver="HB('View Details')" onMouseOut="UB()" ><font size="#-2" color="#000000" face="ARIAL">Details</font></A></TD>
+  <TD WIDTH=1% ALIGN=CENTER NOWRAP><A HREF="javascript:ShowWBSActivities()" onMouseOver="HB('View Activities')" onMouseOut="UB()" ><font size="#-2" color="#000000" face="ARIAL">Activities</font></A></TD>
+  
+  
+  <TD WIDTH=1% ALIGN=CENTER NOWRAP><A HREF="javascript:ShowWBSBudget()" onMouseOver="HB('View Project Financial Data')" onMouseOut="UB()" ><font size="#-2" color="#000000" face="ARIAL">Financial</font></A></TD> 	
+  <TD WIDTH=1% ALIGN=CENTER NOWRAP><A HREF="javascript:ShowWBSNotebk()" onMouseOver="HB('View Project Notebook')" onMouseOut="UB()" ><font size="#-2" color="#000000" face="ARIAL">Notebook</font></A></TD>
+  <TD WIDTH=*% </TD>
+ </tr>
+</TABLE>
+
+</BODY>
+</HTML>
+

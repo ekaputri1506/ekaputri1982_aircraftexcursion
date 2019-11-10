@@ -1,0 +1,72 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8" />
+<SCRIPT LANGUAGE="JAVASCRIPT1.1">
+
+buttons = new Array(9)
+buttons[0] = "images/EPS";
+buttons[1] = "images/activities";
+buttons[2] = "images/resources";
+buttons[3] = "images/roles";
+buttons[4] = "images/wp_docs";
+buttons[5] = "images/usercodes";
+buttons[6] = "images/issues";
+buttons[7] = "images/risks";
+buttons[8] = "images/reports";
+buttons[9] = "images/tracking";
+
+
+function HB(text, id) 
+{
+    document.images['img' + id].src = buttons[id] + "_o.gif";    
+    self.status=text;
+}
+
+function UB(id) 
+{
+    document.images['img' + id].src = buttons[id] + ".gif";    
+    self.status="";
+}
+
+function DB(id) 
+{
+    self.focus();
+}
+
+</SCRIPT>
+<style>
+<!..
+A {text-decoration: none}
+..>
+</style>
+</HEAD>
+
+<BODY BGCOLOR="#94B2E3" 
+      BACKGROUND="images\" 
+      LINK="#000000" 
+      ALINK="#000000" 
+      VLINK="#000000" >
+<TABLE BORDER=0 WIDTH=100% HEIGHT=100% CELLPADDING=1 CELLSPACING=0>
+ <TR>
+  <TD ALIGN=LEFT>
+
+<TABLE BORDER=0 HEIGHT=100% CELLPADDING=0 CELLSPACING=0>
+ <TR>
+   <TD WIDTH=150 VALIGN=CENTER ALIGN=CENTER ></TD>
+   <TD ID="id9" CLASS="relative" VALIGN=TOP ALIGN=CENTER WIDTH=100><NOBR><A HREF="../tracking/tk_main.htm"   onMouseOver="HB('Tracking and Activity Views', 9)" onMouseOut="UB(9)" onClick="DB(9)" TARGET="MainArea"><IMG BORDER=0 NAME="img9" SRC=images/tracking.gif><br><font size="-1" color="#000000" face="ARIAL">Graphics</font></A></NOBR></TD>
+   <TD ID="id1" CLASS="relative" VALIGN=TOP ALIGN=CENTER WIDTH=100><A HREF="../projplan/pp_main.htm" onMouseOver="HB('View WBS', 1)" onMouseOut="UB(1)" onClick="DB(1)" TARGET="MainArea"><IMG BORDER=0 NAME="img1" SRC=images/activities.gif><br><font size="-1" color="#000000" face="ARIAL">WBS</font></A></TD>
+   
+   
+   
+   
+   
+   
+   <TD ID="id8" CLASS="relative" VALIGN=TOP ALIGN=CENTER WIDTH=100><A HREF="../reports/rp_main.htm"   onMouseOver="HB('View Reports', 8)" onMouseOut="UB(8)" onClick="DB(8)" TARGET="MainArea"><IMG BORDER=0 NAME="img8" SRC=images/reports.gif><br><font size="-1" color="#000000" face="ARIAL">Reports</font></A></TD>
+   <TD WIDTH=7><BR></TD>
+ </tr>
+</TABLE>
+
+</TD></TR></TABLE>
+
+</BODY>
+</HTML>

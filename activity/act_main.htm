@@ -1,0 +1,32 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8" />
+<SCRIPT LANGUAGE=JAVASCRIPT>
+var Loaded=false;
+function FrameLoaded()
+{
+ Loaded=true;
+ top.ActivityMode=true;
+ top.RefreshActivity();
+}
+</SCRIPT>
+</HEAD>
+
+<FRAMESET onLoad="FrameLoaded()" ROWS="32,*" FRAMEBORDER=YES FRAMESPACING=0 BORDERS=0>
+
+<FRAME 
+ MARGINHEIGHT = 0
+ MARGINWIDTH  = 0
+ SCROLLING    = NO
+ NAME         = NavArea
+ SRC          = act_nav.htm>
+
+<FRAME 
+ MARGINHEIGHT = 0
+ MARGINWIDTH  = 0
+ SCROLLING    = YES
+ NAME         = ContentArea
+ SRC          = act_ctnt.htm>
+
+</FRAMESET>
+</HTML>

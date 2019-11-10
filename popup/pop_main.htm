@@ -1,0 +1,88 @@
+﻿<HTML>
+
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8" />
+<TITLE>Information</TITLE>
+<SCRIPT LANGUAGE=JAVASCRIPT>
+var Loaded=false;
+var ActivityMode=false;
+var OpenerWnd=top.opener;
+var SectionNum=1;
+var SectionDir="general/";
+var ActID=-1;
+var sDir=self.location.href;
+var myDir=sDir.substring(0,sDir.lastIndexOf('/')+1);
+
+function ShowPopup(sSourceHREF,sDestHREF)
+{
+ GotoHREF=sSourceHREF.substring(0,sSourceHREF.lastIndexOf('/')+1)+sDestHREF;
+ top.PopupContent.location.href=GotoHREF;
+
+ ActivityMode=false;
+
+ if(navigator.appName=="Netscape") self.focus();
+}
+function ShowActivityPrep(iActID)
+{
+ if(ActivityMode==false)
+ {
+  ActID=iActID;
+  top.PopupContent.location.href=myDir+'../activity/act_main.htm';
+ }
+ else
+  ShowActivity(iActID);
+}
+function ShowActivity(iActID)
+{
+ if(ActivityMode==false)
+ {
+  ShowActivityPrep(iActID);
+  return;
+ }
+ ActID=iActID;
+ RefreshActivity();
+}  
+function RefreshActivity()
+{
+ if(SectionNum==1)SectionDir="general/";
+ if(SectionNum==2)SectionDir="resource/";
+ if(SectionNum==3)SectionDir="wpdocs/";
+ if(SectionNum==4)SectionDir="predsucc/";
+ if(SectionNum==5)SectionDir="detail/";
+ if(SectionNum==6)SectionDir="steps/";
+ if(ActID!=-1)top.PopupContent.ContentArea.document.location.href=myDir+'../activity/'+SectionDir+ActID+".htm";
+ 
+ if(navigator.appName=="Netscape") self.focus();
+}
+function ShowObject(sSourceHREF,iObjID)
+{
+ ActivityMode=false;
+
+ GotoHREF=sSourceHREF.substring(0,sSourceHREF.lastIndexOf('/')+1)+iObjID+'.htm';
+ top.PopupContent.location.href=GotoHREF;
+}
+function ClearOpener()
+{
+ if(OpenerWnd.Alive)
+  OpenerWnd.top.PopupWnd=null;
+}
+</SCRIPT>
+</HEAD>
+
+<FRAMESET onLoad="Loaded=true;" onUnload="ClearOpener()" ROWS="40,*" FRAMEBORDER=YES FRAMESPACING=0 BORDER=0>
+
+<FRAME 
+ MARGINHEIGHT = 0
+ MARGINWIDTH  = 0
+ NAME         = PopupButtons
+ SRC          = pop_btns.htm>
+
+<FRAME 
+ MARGINHEIGHT = 0
+ MARGINWIDTH  = 0
+ SCROLLING    = YES
+ NAME         = PopupContent
+ SRC          = pop_ctnt.htm>
+
+</FRAMESET>
+</HTML>

@@ -1,0 +1,239 @@
+<html>
+<head>
+<title>Treeview</title>
+
+<script language="JavaScript1.1">
+<!--
+
+var menuItems = new Array();
+var itemIndex = new Array();
+var sDir=self.location.href;
+var sThisDir=sDir.substring(0,sDir.lastIndexOf('/')+1);
+var curItemID = 0;
+
+function selectItem(name) {
+
+    for (var i = 0; i < itemIndex.length; i++) {
+	     if (menuItems[itemIndex[i]].name==name) {
+                 performActions(name);
+                 break;               
+             }
+    }
+}
+
+function addItem(item) {
+	var itemCount = this.items.length;
+	this.items[itemCount] = item;
+	if (this.imageType == "EPS") {
+            this.imageName = "eNodeOff.gif";
+	}
+	else if (this.imageType == "PROJECT") {
+            this.imageName = "pNodeOff.gif";
+	}
+	else {
+            this.imageName = "NodeOff.gif";
+	}
+}
+
+function show() {
+	this.isVisible = true;
+}
+
+
+function hide() {
+	this.isVisible = false;
+}
+
+function expand() {
+	for (var i = 0; i < this.items.length; i++) {
+		var item = this.items[i];
+		item.show();
+	}
+	this.isOn = true;
+	if (this.imageType == "EPS") {
+	    this.imageName="eNodeOn.gif";
+	}
+	else if (this.imageType == "PROJECT") {
+	    this.imageName="pNodeOn.gif";
+	}
+	else {
+	    this.imageName="NodeOn.gif";
+	}
+}
+
+
+function shrink() {
+	for (var i = 0; i < this.items.length; i++) {
+		var item = this.items[i];
+		if (item.items.length > 0) {
+			if (item.isOn) {
+				item.shrink();
+			}
+		}
+		item.hide();
+	}
+	this.isOn = false;
+
+	if (this.imageType == "EPS") {
+            this.imageName = "eNodeOff.gif";
+	}
+	else if (this.imageType == "PROJECT") {
+            this.imageName = "pNodeOff.gif";
+	}
+	else {
+            this.imageName = "NodeOff.gif";
+	}
+}
+
+
+function link() {
+	this.frame.location = this.hyperLink;
+}
+
+function menuItem(parent, name, text, hlink, frame, sbarmsg, assigned, type) {
+	this.parent = parent;
+	this.name = name;
+	this.imageType = type;
+	if (this.imageType == "EPS") {
+	    this.imageName="eNode.gif";
+	}
+	else if (this.imageType == "PROJECT") {
+	    this.imageName="pNode.gif";
+	}
+	else {
+	    this.imageName="node.gif";
+	}
+	this.imageWidth = 25;
+	this.imageHeight = 16;
+	this.text = text;
+	this.hyperLink = hlink;
+	this.frame = frame;
+	this.statusBarMessage = sbarmsg;
+
+	/* Indented */
+	this.chainPos = 0;
+	if (this.parent == "") {
+		this.isVisible = true;
+	}
+	else {
+		this.isVisible = false;
+		var temp = this;
+		while (temp.parent != "") {
+			this.chainPos++;
+			temp = menuItems[temp.parent];
+		}
+	}
+	this.isOn = false;
+	this.items = new Array();
+	this.addItem = addItem;
+	this.show = show;
+	this.hide = hide;
+	this.expand = expand;
+	this.shrink = shrink;
+	this.link = link;
+	var count = itemIndex.length;
+	itemIndex[count] = this.name;
+	menuItems[this.name] = this;
+	if (this.parent != "") {
+		menuItems[this.parent].addItem(this);
+	}
+}
+	
+function performActions(name) {
+	var item = menuItems[name];
+	curItemID = name;
+	parent.parent.DisplayArea.Options.CurrentObjectID = name;
+	if (item.items.length > 0) {  // Indicating this has sub menuItems
+		if (item.isOn) { item.shrink(); }
+		else { item.expand(); }
+	}
+
+	if (item.parent!="") {
+	    expandUpTree( item )
+	}
+
+	reloadWebPage();
+	if (item.hyperLink != "" ) {
+                item.hyperLink = "../"+parent.parent.DisplayArea.Options.CurrentDir+name+".htm";
+                item.link();
+        }
+}
+
+function expandUpTree( item ) {
+    var parent_item = menuItems[item.parent];
+    if ( parent_item.isOn == false ) {
+      parent_item.expand(); }
+    if (parent_item.parent!="") {
+         expandUpTree( parent_item ); }
+}
+
+
+function reloadWebPage() {
+	parent.tree.document.clear();
+	parent.tree.document.write("<HTML><HEAD>\n");
+	parent.tree.document.write("<style>\n");
+	parent.tree.document.write("<!..\n");
+	parent.tree.document.write("A {text-decoration: none}\n");
+	parent.tree.document.write("..>\n");
+	parent.tree.document.write("</style>\n");
+	parent.tree.document.write("</HEAD>\n");
+	parent.tree.document.write("<body bgcolor=#FFFFFF >\n");
+	parent.tree.document.write("<font face=arial size=4><b>WBS</b></font>");
+	parent.tree.document.write("<table border=0 width=100% height=100%><tr><td valign=top nowrap>");
+	parent.tree.document.write("<font face='Arial' size='-2'>\n");
+	for (var i = 0; i < itemIndex.length; i++) {
+		var item = menuItems[itemIndex[i]];
+		if (item.isVisible) {
+			for (var i2 = 0; i2 < item.chainPos; i2++) {
+				parent.tree.document.write("&nbsp; &nbsp; &nbsp; &nbsp; ");
+			}
+			parent.tree.document.write("<a href='javascript:parent.treedef.performActions(\"" + item.name + "\");' onMouseOver=\"self.status='';return true\">");
+			parent.tree.document.write("<img src='" + sThisDir + item.imageName + "' name='" + item.name + "' ");
+			parent.tree.document.write("width=" + item.imageWidth + " height=" + item.imageHeight+ " ");
+			parent.tree.document.write("border=0 align=top>");
+
+ 	        	if (curItemID == item.name) {
+   				parent.tree.document.write("<font color=#0000FF> " + item.text + "</font></a><br>\n");
+			}
+			else {
+   				parent.tree.document.write("<font color=#000000> " + item.text + "</font></a><br>\n");
+			}
+		}
+	}
+	parent.tree.document.write("</font>");
+	parent.tree.document.write("</td></tr><tr><td valign=bottom align=left>");
+	parent.tree.document.write("<font face=Arial size=-2>\n");
+	parent.tree.document.write("</td></tr></table>");
+	parent.tree.document.write("</BODY></HTML>\n");
+	parent.tree.document.close();
+	if (curItemID != null)
+        parent.tree.location.href = parent.tree.location.href + "#" + curItemID;
+}
+function setUp()
+{
+new menuItem("", "26010", "PK-LOO Runway Excursion Recovery Program", "./detail/26010.htm", parent.parent.DisplayArea.Content, "26010", "","PROJECT");
+new menuItem("26010", "26011", "Boeing AOG Team Program", "./detail/26011.htm", parent.parent.DisplayArea.Content, "26011", "","WBS");
+new menuItem("26010", "26012", "Opt1 - Purchase Shelter", "./detail/26012.htm", parent.parent.DisplayArea.Content, "26012", "","WBS");
+new menuItem("26010", "26013", "Batam and Lion Air Review", "./detail/26013.htm", parent.parent.DisplayArea.Content, "26013", "","WBS");
+new menuItem("26010", "26014", "Engine Repair and Installation", "./detail/26014.htm", parent.parent.DisplayArea.Content, "26014", "","WBS");
+new menuItem("26010", "26015", "Components Repair and Installation", "./detail/26015.htm", parent.parent.DisplayArea.Content, "26015", "","WBS");
+new menuItem("26010", "26016", "Components Spare", "./detail/26016.htm", parent.parent.DisplayArea.Content, "26016", "","WBS");
+ }
+
+
+//-->
+
+</script>
+</head>
+
+<body bgcolor="#FFFFFF" text="#FFFFFF">
+
+<script language="JavaScript1.1">
+<!--
+  setUp();
+  reloadWebPage();
+//-->
+</script>
+
+</body>
+</html>
