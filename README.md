@@ -6,7 +6,7 @@ Please download or fork all my files to your computer to open it.</br>
 I designed and created this analysis using HTML and Primavera P6.
 
 
-# Open it with *google chrome/mozilla/other browser*.
+# Open it with *google chrome/mozilla/other browser for index.html*.
 
 
 E-mail: renniekaputri15@gmail.com </br>
