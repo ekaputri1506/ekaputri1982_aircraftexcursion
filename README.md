@@ -10,4 +10,4 @@ I designed and created this analysis using HTML and Primavera P6.
 
 
 E-mail: renniekaputri15@gmail.com </br>
-WA/Phone: +62-81905146181 (Indonesia)
+WA/Phone: +62-81905146181
