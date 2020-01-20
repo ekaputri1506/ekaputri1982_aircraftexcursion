@@ -9,5 +9,5 @@ I designed and created this analysis using HTML and Primavera P6.
 # Open it with *google chrome/mozilla/other browser for index.html*.
 
 
-E-mail: renniekaputri15@gmail.com </br>
-WA/Phone: +62-81905146181
+E-mail: renniekaputri1982@gmail.com </br>
+
